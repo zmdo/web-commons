@@ -55,10 +55,10 @@ public class StandardResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             }
 
             return result;
-        } else if (body instanceof IStatusCodeException exception) {
+        } else if (body instanceof IStatusCodeException) {
             // 如果是可预测的服务器异常，那么就返回异常的错误代码
             return new R<>(
-                    exception.getCode(),
+                    ((IStatusCodeException) body ).getCode(),
                     StandardCode.SERVER_ERROR_MESSAGE
             );
         } else {
