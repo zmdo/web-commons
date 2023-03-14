@@ -13,6 +13,4 @@ public interface StandardEnumerator<T extends Enum<T>> {
     @JsonValue
     String value();
 
-    T valueOf(int code);
-
 }
