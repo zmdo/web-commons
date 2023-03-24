@@ -237,7 +237,7 @@ public class R<T> implements Cloneable {
      * @param <T> 数据类型
      * @see Page
      */
-    public static <T> R<Page<T>> page(int current,int size,int total,List<T> records) {
+    public static <T> R<Page<T>> page(long current,long size,long total,List<T> records) {
         Page<T> page = new Page<>(
                 current,
                 size,

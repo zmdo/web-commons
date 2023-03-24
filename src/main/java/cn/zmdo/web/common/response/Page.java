@@ -1,7 +1,7 @@
 package cn.zmdo.web.common.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @param <T> 类
  */
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class Page<T> {
 
     /**
@@ -21,22 +21,29 @@ public class Page<T> {
      *     </font>
      * </p>
      */
-    private Integer currentPage;
+    private Long currentPage;
 
     /**
      * 一页有多少条数据
      */
-    private Integer pageSize;
+    private Long pageSize;
 
     /**
      * 一共有多少条数据
      */
-    private Integer total;
+    private Long total;
 
     /**
      * 当前页的数据
      */
     private List<T> records;
+
+    public Page(long current,long size,long total,List<T> records) {
+        this.currentPage = current;
+        this.pageSize = size;
+        this.total = total;
+        this.records = records;
+    }
 
     /**
      * 创建一个单页的记录
@@ -48,7 +55,7 @@ public class Page<T> {
      * @param <T> 返回的数据类型
      */
     public static <T> Page<T> singlePage(List<T> records) {
-        return new Page<>(records.size(),0, records.size(), records);
+        return new Page<>(0L, records.size(), records.size(), records);
     }
 
 }
