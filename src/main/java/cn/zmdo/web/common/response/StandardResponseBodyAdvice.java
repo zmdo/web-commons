@@ -1,6 +1,7 @@
 package cn.zmdo.web.common.response;
 
 import cn.zmdo.web.common.exception.IStatusCodeException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * 标准响应结果处理
  */
+@Slf4j
 @RestControllerAdvice
 public class StandardResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
@@ -62,6 +64,7 @@ public class StandardResponseBodyAdvice implements ResponseBodyAdvice<Object> {
                     StandardCode.SERVER_ERROR_MESSAGE
             );
         } else {
+            log.error("server error : {}",body);
             // 如果不是正常的返回结果，就认为发生了异常，
             // 进行对异常的统一异常处理
             return new R<>(
