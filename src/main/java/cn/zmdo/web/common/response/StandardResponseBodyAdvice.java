@@ -63,7 +63,7 @@ public class StandardResponseBodyAdvice implements ResponseBodyAdvice<Object> {
                     ((IStatusCodeException) body ).getCode(),
                     StandardCode.SERVER_ERROR_MESSAGE
             );
-        } else {
+        } else if (body instanceof Exception) {
             log.error("server error : {}",body);
             // 如果不是正常的返回结果，就认为发生了异常，
             // 进行对异常的统一异常处理
@@ -72,6 +72,7 @@ public class StandardResponseBodyAdvice implements ResponseBodyAdvice<Object> {
                     StandardCode.SERVER_ERROR_MESSAGE
             );
         }
+        return body;
     }
 
 }
